@@ -6,5 +6,5 @@ __pycache__/
 .pending-*
 feedback-output/
 local-data/
-knowledge/scopes/
-knowledge/local/
+**/knowledge/scopes/
+**/knowledge/local/

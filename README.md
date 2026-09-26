@@ -2,20 +2,22 @@
 
 持续学习客服资料、起草回复、复盘服务质量，并从获授权的近期客服对话中提炼经验。朋友使用后可以回传去标识的改进反馈，由维护者审核后更新公共技能。
 
-**当前版本：1.1.0。** 包内含23条通用方法，不包含原始培训文档、视频、客户对话、员工身份或任何公司的生效赔付规则。技能名不是认证，没有真实业务对照数据时不宣称服务水平提升。
+**当前版本：1.1.1。** 包内含23条通用方法，不包含原始培训文档、视频、客户对话、员工身份或任何公司的生效赔付规则。技能名不是认证，没有真实业务对照数据时不宣称服务水平提升。
 
 ## 安装
 
 把以下这句话发给支持安装Skills的Codex：
 
-> 请使用 skill-installer，从 https://github.com/bigjun1-art/gold-customer-service 安装金牌客服技能，仓库技能路径为根目录，名称为 gold-customer-service。已有同名技能时先检查本地知识与版本，保留备份后比较更新。
+> 请使用 skill-installer，从 https://github.com/bigjun1-art/gold-customer-service 安装金牌客服技能，仓库技能路径为 skills/gold-customer-service，名称为 gold-customer-service。已有同名技能时先检查本地知识与版本，保留备份后比较更新。
 
-也可手动下载本仓库，将含SKILL.md的整个目录命名为`gold-customer-service`，放入所用客户端的技能目录。Codex默认目录为`~/.codex/skills/`；不要只复制入口文件。重新开启一个任务后确认客户端可发现该技能。其他客户端按其技能目录规范安装，本项目未对所有客户端作兼容承诺。
+也可手动下载本仓库，将skills/下含SKILL.md的整个目录命名为`gold-customer-service`，放入所用客户端的技能目录。Codex默认目录为`~/.codex/skills/`；不要只复制入口文件。重新开启一个任务后确认客户端可发现该技能。其他客户端按其技能目录规范安装，本项目未对所有客户端作兼容承诺。
 
 首次安装的终端示例（已有目录时停止，不覆盖）：
 
 ```sh
-git clone https://github.com/bigjun1-art/gold-customer-service.git ~/.codex/skills/gold-customer-service
+git clone https://github.com/bigjun1-art/gold-customer-service.git gold-customer-service-repo
+mkdir -p ~/.codex/skills
+test ! -e ~/.codex/skills/gold-customer-service && cp -R gold-customer-service-repo/skills/gold-customer-service ~/.codex/skills/gold-customer-service
 ```
 
 核心分析需要支持Skills的语言模型；本地辅助脚本需要Python 3。知识写入工具使用POSIX文件锁，适用于macOS/Linux；不需要客服平台账号、外部API密钥或另一套技能。模型负责理解与脱敏复核，脚本负责结构检查、反馈打包和版本可靠写入。
@@ -38,7 +40,7 @@ git clone https://github.com/bigjun1-art/gold-customer-service.git ~/.codex/skil
 
 反馈包含版本、日期范围、案例覆盖、建议修改、支持证据摘要、反例和验证结果。脚本不读取原始对话、不联网、不上传、不自动合入；最终是否可以公开必须由实际内容复核和用户授权确定。隐私规则不能发现所有姓名、隐含身份或业务机密。
 
-合成示例与命令：
+在仓库中先进入 `skills/gold-customer-service`，或在已安装技能目录执行。合成示例与命令：
 
 ```sh
 python3 scripts/feedback_bundle.py validate assets/feedback-example.json
@@ -47,7 +49,7 @@ mkdir -p feedback-output
 python3 scripts/feedback_bundle.py build assets/feedback-example.json --output feedback-output/demo
 ```
 
-示例用于验证打包功能，不是真实客服效果证据。使用者应生成自己的反馈文件；授权字段不能直接照搬示例。具体流程见[反馈与审核](references/feedback.md)。
+示例用于验证打包功能，不是真实客服效果证据。使用者应生成自己的反馈文件；授权字段不能直接照搬示例。具体流程见[反馈与审核](skills/gold-customer-service/references/feedback.md)。
 
 公开提交仅在用户明确授权后执行：
 
@@ -65,11 +67,12 @@ gh issue create --repo bigjun1-art/gold-customer-service --title '蒸馏反馈�
 - 商品知识、机器人回答、转人工与分流。
 - 回复演练、风险话术和历史规则冲突。
 
-[知识入口](knowledge/index.md)按场景加载，来源摘要用于追踪，不代表朋友能访问原件。平台政策、商品功效、退款期限和补偿额度都需核实当前业务依据。
+[知识入口](skills/gold-customer-service/knowledge/index.md)按场景加载，来源摘要用于追踪，不代表朋友能访问原件。平台政策、商品功效、退款期限和补偿额度都需核实当前业务依据。
 
 ## 开发与验证
 
 ```sh
+cd skills/gold-customer-service
 python3 -m unittest discover -s tests -p 'test_*.py'
 ```
 
@@ -77,4 +80,4 @@ python3 -m unittest discover -s tests -p 'test_*.py'
 
 ## 来源与贡献
 
-方法设计与定向源码审查见[设计依据](references/design-sources.md)及[源码核查](references/source-review.md)。独立实现的工具与文档按[MIT License](LICENSE)发布；上游项目、未分发原始培训资料及第三方商标仍受各自权利约束。
+方法设计与定向源码审查见[设计依据](skills/gold-customer-service/references/design-sources.md)及[源码核查](skills/gold-customer-service/references/source-review.md)。独立实现的工具与文档按[MIT License](LICENSE)发布；上游项目、未分发原始培训资料及第三方商标仍受各自权利约束。
