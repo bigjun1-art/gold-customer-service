@@ -1,0 +1,4 @@
+interface:
+  display_name: "金牌客服"
+  short_description: "学习客服资料与近期对话，提炼经验、验证候选并生成去标识改进反馈"
+  default_prompt: "使用 $gold-customer-service 分析这批近期客服对话，提炼可追溯候选、标注未知结果，并准备本地改进反馈草稿。"

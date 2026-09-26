@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.DS_Store
+.history/
+.write.lock
+.pending-*
+feedback-output/
+local-data/
+knowledge/scopes/
+knowledge/local/

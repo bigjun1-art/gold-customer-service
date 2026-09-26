@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "skill_version": "1.1.0",
+  "feedback_id": "fb-v1-synthetic-return-001",
+  "synthetic": true,
+  "period": {
+    "start": "2026-09-01",
+    "end": "2026-09-07"
+  },
+  "scope": "scope-demo-store-a",
+  "source_stats": {
+    "conversation_count": 3,
+    "included_case_count": 3,
+    "missing_count": 0,
+    "missing_reasons": [],
+    "notes": ["本文件所有案例均为合成内容。"]
+  },
+  "candidates": [
+    {
+      "id": "return-condition-clarity",
+      "status": "unverified",
+      "target": {
+        "type": "reference_path",
+        "value": "references/service.md"
+      },
+      "trigger": "顾客询问已拆封商品是否可退时",
+      "proposed_change": "先确认商品状态与问题类型，再说明对应处理路径；信息不足时明确补充询问项。",
+      "rationale": "减少在事实不完整时给出过早结论的情况。",
+      "evidence": [
+        {
+          "case_id": "case-synthetic-001",
+          "turns": ["turn-2-4"],
+          "redacted_summary": "合成案例：客服在未确认商品状态前直接给出结论，后续追加信息导致改口。",
+          "outcome": "resolved"
+        }
+      ],
+      "counterexamples": [
+        {
+          "case_id": "case-synthetic-002",
+          "redacted_summary": "合成案例：信息完整时，现有回复已能一次说明处理路径。",
+          "outcome": "resolved"
+        }
+      ],
+      "evaluation": {
+        "training_case_ids": ["case-synthetic-001", "case-synthetic-002"],
+        "heldout_case_ids": ["case-synthetic-003"],
+        "baseline_result": "unknown",
+        "candidate_result": "unknown",
+        "conclusion": "inconclusive",
+        "notes": "合成示例未执行实际评估，不声明效果提升。"
+      }
+    }
+  ],
+  "privacy_reviewed": true,
+  "share_authorized": true
+}
